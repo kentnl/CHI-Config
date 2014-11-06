@@ -114,7 +114,7 @@ sub _load_version {
   my $entry_msg = "$entry{file} ( entry #$entry{entry_no} )";
 
   if ( $entry{spec} and $entry{spec} ne $spec ) {
-    croak "Spec version required by $entry_msg is ==$entry{spec} but this is version $spec";
+    croak "Spec version required by $entry_msg is ==$entry{spec}, this is $spec";
   }
   if ( $entry{min} ) {
     require version;
