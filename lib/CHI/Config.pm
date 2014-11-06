@@ -234,17 +234,9 @@ version 0.001000
 
   my $cache = $config->get_cache('myproject.roflmayo');  # Now gets user defined copy
 
-=head1 METHODS
+=head1 CONSTRUCTOR ARGUMENTS
 
-=head2 C<get_cache>
-
-Retrieve an instance of a cache object for consumption.
-
-  my $cache = $config->get_cache('myproject.myname');
-
-  $cache-># things with CHI
-
-=carg C<config_paths>
+=head2 C<config_paths>
 
 I<Optional>: An ArrayRef of path prefixes to scan and load.
 
@@ -273,14 +265,14 @@ Default paths loaded are as follows:
     ~/.chi/config.*
     /etc/chi/config.*
 
-=carg C<config_files>
+=head2 C<config_files>
 
 I<Optional>: An ArrayRef of files to scan and load.
 
 If specified, this list entirely overrules that provided by
 L<< C<config_paths>|/config_paths >>
 
-=carg C<defaults>
+=head2 C<defaults>
 
 I<Recommended>: An ArrayRef of defaults in the same notation as the configuration spec.
 
@@ -291,6 +283,16 @@ I<Recommended>: An ArrayRef of defaults in the same notation as the configuratio
   ],
 
 See L</ENTRIES>
+
+=head1 METHODS
+
+=head2 C<get_cache>
+
+Retrieve an instance of a cache object for consumption.
+
+  my $cache = $config->get_cache('myproject.myname');
+
+  $cache-># things with CHI
 
 =head1 ENTRIES
 

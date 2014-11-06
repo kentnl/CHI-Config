@@ -496,6 +496,11 @@
                      },
                      {
                         "class" : "Pod::Weaver::Section::Collect",
+                        "name" : "CONSTRUCTOR ARGUMENTS",
+                        "version" : "4.007"
+                     },
+                     {
+                        "class" : "Pod::Weaver::Section::Collect",
                         "name" : "METHODS",
                         "version" : "4.007"
                      },

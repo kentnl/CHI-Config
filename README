@@ -39,14 +39,8 @@ SYNOPSIS
 
       my $cache = $config->get_cache('myproject.roflmayo');  # Now gets user defined copy
 
-METHODS
-  "get_cache"
-    Retrieve an instance of a cache object for consumption.
-
-      my $cache = $config->get_cache('myproject.myname');
-
-      $cache-># things with CHI
-
+CONSTRUCTOR ARGUMENTS
+  "config_paths"
     *Optional*: An ArrayRef of path prefixes to scan and load.
 
     For instance:
@@ -74,11 +68,13 @@ METHODS
         ~/.chi/config.*
         /etc/chi/config.*
 
+  "config_files"
     *Optional*: An ArrayRef of files to scan and load.
 
     If specified, this list entirely overrules that provided by
     "config_paths"
 
+  "defaults"
     *Recommended*: An ArrayRef of defaults in the same notation as the
     configuration spec.
 
@@ -89,6 +85,14 @@ METHODS
       ],
 
     See "ENTRIES"
+
+METHODS
+  "get_cache"
+    Retrieve an instance of a cache object for consumption.
+
+      my $cache = $config->get_cache('myproject.myname');
+
+      $cache-># things with CHI
 
 ENTRIES
     Both the internal array based interface and the configuration file are a
@@ -155,17 +159,4 @@ COPYRIGHT AND LICENSE
 
     This is free software; you can redistribute it and/or modify it under
     the same terms as the Perl 5 programming language system itself.
-
-POD ERRORS
-    Hey! The above document had some coding errors, which are explained
-    below:
-
-    Around line 247:
-        Unknown directive: =carg
-
-    Around line 276:
-        Unknown directive: =carg
-
-    Around line 283:
-        Unknown directive: =carg
 
