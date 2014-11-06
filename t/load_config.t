@@ -47,7 +47,7 @@ my $cfg = CHI::Config->new(
       name   => 'myapp.cache_b',
       type   => 'driver',
       config => {
-        'driver' => 'Memory',
+        'driver'    => 'Memory',
         'datastore' => {},
       },
     },
@@ -55,7 +55,7 @@ my $cfg = CHI::Config->new(
       type   => 'driver',
       name   => 'myapp.cache_a',
       config => {
-        'driver' => 'Memory',
+        'driver'    => 'Memory',
         'datastore' => {},
       },
     }
