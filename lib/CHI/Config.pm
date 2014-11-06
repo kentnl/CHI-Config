@@ -108,18 +108,25 @@ sub BUILD {
 
 sub _load_version {
   my ( $self, %entry ) = @_;
+
+  my $spec      = '0.1.0';
+  my $entry_msg = "$entry{file} ( entry #$entry{entry_no} )";
+
+  if ( $entry{spec} and $entry{spec} ne $spec ) {
+    croak "Spec version required by $entry_msg is ==$entry{spec} but this is version $spec";
+  }
   if ( $entry{min} ) {
     require version;
     my $min = version->parse( $entry{min} );
     if ( $min > $VERSION ) {
-      croak "Minimum version required by $entry{file} ( entry #$entry{entry_no} ) is $min, we have $VERSION";
+      croak "Minimum version required by $entry_msg is $min, we have $VERSION";
     }
   }
   if ( $entry{max} ) {
     require version;
     my $max = version->parse( $entry{max} );
     if ( $max < $VERSION ) {
-      croak "Maximum version required by $entry{file} ( entry #$entry{entry_no} ) is $max, we have $VERSION";
+      croak "Maximum version required by $entry_msg is $max, we have $VERSION";
     }
   }
   return;
@@ -225,6 +232,121 @@ version 0.001000
   ]
 
   my $cache = $config->get_cache('myproject.roflmayo');  # Now gets user defined copy
+
+=head1 METHODS
+
+=head2 C<get_cache>
+
+Retreive an instance of a cache object for consumption.
+
+  my $cache = $config->get_cache('myproject.myname');
+
+  $cache-># things with CHI
+
+=carg C<config_paths>
+
+I<Optional>: An arrayref of path prefixes to scan and autoload.
+
+For instance:
+
+  ( config_paths => ['./foo'] )
+
+Would automatically attempt to load any files called
+
+  foo.yml
+  foo.json
+  foo.ini
+
+And load them with the relevant helpers.
+
+See L<< C<Config::Any>|Config::Any >> for details on this mechanism.
+
+Paths will be interpreted in the order specified, with the first one
+taking precedence over the latter ones for any given driver name,
+with C<defaults> being taken only if they're needed.
+
+Default paths loaded are as follows:
+
+    $ENV{CHI_CONFIG_DIR}/config.*
+    ./chi_config.*
+    ~/.chi/config.*
+    /etc/chi/config.*
+
+=carg C<config_files>
+
+I<Optional>: An ArrayRef of files to scan and autoload.
+
+If specified, this list entirely overrules that provided by
+L<< C<config_paths>|/config_paths >>
+
+=carg C<defaults>
+
+I<Recommeneded>: An ArrayRef of defaults in the same notation as the configuration spec.
+
+  defaults => [ 
+       $entry,
+       $entry,
+       $entry,
+  ],
+
+See L</ENTRIES>
+
+=head1 ENTRIES
+
+Both the internal array based interface and the configuration file
+are a list of C<Entries>. Design somewhat inspired by C<Config::MVP>'s
+sequence model, but much more lightweight.
+
+=head2 C<driver> entry
+
+These make up the core of a configuration.
+
+  {
+    type => 'driver',
+
+    # The following are all passed through to
+    # CHI::Config::Driver
+
+    # STRONGLY recommended
+    name => 'mynamespace.mycachename',
+
+    # RAW CHI arguments
+    config => {
+      %CONFIG    #
+    },
+
+    # return singleton or new caches?
+    memoize => 0,
+  }
+
+See L<< C<CHI::Config::Driver>|CHI::Config::Driver >> for details.
+
+=head2 C<version> entry
+
+This is a mostly unnecessary element simply designed to give
+some kind of informal API in the event there are changes in
+how the configuration is parsed.
+
+Currently, Spec version is == C<0.1.0>
+
+  {
+    type => 'version',
+
+    # Declare a minimum version of CHI::Config
+    min => 0.001000,
+
+    # Declare a maximum version of CHI::Config
+    max => 1.000000,
+
+    # Require exactly specification 0.1.0
+    spec => '0.1.0',
+  }
+
+C<max> and C<min> give range controls on the version of C<CHI::Config> itself.
+
+C<spec> gives an exact match on the I<interface> provided by C<CHI::Config>, and is processed as an exact string match.
+
+Any of the criteria not being satisfied will result in a C<croak>
 
 =head1 AUTHOR
 
