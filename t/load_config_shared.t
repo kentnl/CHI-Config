@@ -12,15 +12,15 @@ my $scratch = Path::Tiny->tempdir;
 $scratch->child('config.json')->spew_raw(<<'EOF');
 [
   {
-    'type':'version',
-    'min':'0.001000'
+    "type":"version",
+    "min":"0.001000"
   },
   {
-    'type': 'driver',
-    'name': 'myapp.cache_a',
-    'config': {
-      'driver': 'Memory',
-      'global': 0
+    "type": "driver",
+    "name": "myapp.cache_a",
+    "config": {
+      "driver": "Memory",
+      "global": 0
     }
   }
 ]
@@ -28,12 +28,12 @@ EOF
 
 $scratch->child('config_b.json')->spew_raw(<<'EOF');
 [{
-  'type': 'driver',
-  'name': 'myapp.cache_a',
-  'memoize': 1,
-  'config': {
-    'driver': 'Memory',
-    'global': 0
+  "type": "driver",
+  "name": "myapp.cache_a",
+  "memoize": 1,
+  "config": {
+    "driver": "Memory",
+    "global": 0
   }
 }]
 EOF
