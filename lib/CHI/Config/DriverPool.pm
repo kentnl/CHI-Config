@@ -89,7 +89,7 @@ configurations across multiple files.
 
 It is assumed that the consumer is traversing a tree of configurations of
 some kind in order of "most relevant" to "least relevant", for example,
-"most relevant" would be the files in C<./> , secondmost relevant
+"most relevant" would be the files in C<./> , second-most relevant
 would be C<~/> somewhere, somewhere later is C</etc/> and least relevant
 is any defaults provided by the program itself.
 
@@ -127,7 +127,7 @@ Fetch and a named C<CHI> cache object by requesting one from the named C<CHI::Co
 Enables reporting where driver definitions are being shadowed.
 
 This will show shadowing everywhere there is user defined configuration
-in addition to a default, so is potentially more spammy than intended,
+in addition to a default, so is potentially more noisy than intended,
 but it is hopefully useful in diagnosing misplaced identifiers.
 
 =head1 AUTHOR

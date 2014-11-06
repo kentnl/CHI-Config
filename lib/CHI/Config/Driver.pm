@@ -75,7 +75,7 @@ Two parameters C<file> and C<entry_no> are provided automatically by the infrast
 
 Returns a C<CHI> cache object using the definition in C<config>.
 
-This may return the same object accross multiple calls ( if C< L</memoize> > is true ).
+This may return the same object across multiple calls ( if C< L</memoize> > is true ).
 
 Otherwise returns a new C<CHI> instance with every call.
 
@@ -87,7 +87,7 @@ Returns a string
 
 =head2 C<name>
 
-The name of this driver for lookup purposes.
+The name of this driver for look-up purposes.
 
 B<Strongly> Recommended format ( I<especially> for CPAN ) is some sort
 of alias path with a prefix, i.e:
