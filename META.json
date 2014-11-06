@@ -133,6 +133,17 @@
       }
    },
    "release_status" : "stable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/kentnl/CHI-Config/issues"
+      },
+      "homepage" : "https://github.com/kentnl/CHI-Config",
+      "repository" : {
+         "type" : "git",
+         "url" : "https://github.com/kentnl/CHI-Config.git",
+         "web" : "https://github.com/kentnl/CHI-Config"
+      }
+   },
    "version" : "0.001000",
    "x_BuiltWith" : {
       "modules" : {

@@ -40,6 +40,10 @@ requires:
   strict: '0'
   version: '0'
   warnings: '0'
+resources:
+  bugtracker: https://github.com/kentnl/CHI-Config/issues
+  homepage: https://github.com/kentnl/CHI-Config
+  repository: https://github.com/kentnl/CHI-Config.git
 version: '0.001000'
 x_BuiltWith:
   modules:
