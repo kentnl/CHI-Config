@@ -22,16 +22,16 @@ use Data::Dump qw(pp);
 
 sub get_cache {
   my ($self) = @_;
+  return $self->{_cache} if exists $self->{_cache};
 
   require CHI;
   require Storable;
 
-  my %args = %{ Storable::dclone( $self->config ) };
+  my $instance = CHI->new(%{ $self->config });
+  
+  $self->{_cache} = $instance if $self->memoize;
 
-  return CHI->new(%args) unless $self->memoize;
-
-  return $self->{_cache} if exists $self->{_cache};
-  return ( $self->{_cache} = CHI->new(%args) );
+  return $instance;
 }
 
 sub source {

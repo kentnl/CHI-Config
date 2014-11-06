@@ -21,7 +21,7 @@ $scratch->child('config.json')->spew_raw(<<'EOF');
     "name": "myapp.cache_a",
     "config": {
       "driver": "Memory",
-      "global": 0
+      "datastore": {}
     }
   }
 ]
@@ -33,7 +33,7 @@ $scratch->child('config_b.json')->spew_raw(<<'EOF');
   "name": "myapp.cache_a",
   "config": {
     "driver": "Memory",
-    "global": 0
+    "datastore": {}
   }
 }]
 EOF
@@ -60,7 +60,7 @@ my $cfg = CHI::Config->new(
       type   => 'driver',
       config => {
         'driver' => 'Memory',
-        'global' => 0,
+        'datastore' => {},
       },
     },
     {
@@ -68,7 +68,7 @@ my $cfg = CHI::Config->new(
       name   => 'myapp.cache_a',
       config => {
         'driver' => 'Memory',
-        'global' => 0,
+        'datastore' => {},
       },
     }
   ]
