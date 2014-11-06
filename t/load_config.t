@@ -6,8 +6,9 @@ use Test::More;
 # ABSTRACT: Test basic config loading
 
 use Path::Tiny qw(path);
+use Test::TempDir::Tiny qw( tempdir );
 
-my $scratch = Path::Tiny->tempdir;
+my $scratch = path(tempdir);
 
 $scratch->child('config.json')->spew_raw(<<'EOF');
 [
@@ -32,8 +33,8 @@ $scratch->child('config_b.json')->spew_raw(<<'EOF');
   'name': 'myapp.cache_a',
   'config': {
     'driver': 'Memory',
-    'global': 0,
-  },
+    'global': 0
+  }
 }]
 EOF
 

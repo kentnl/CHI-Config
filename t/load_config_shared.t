@@ -33,8 +33,8 @@ $scratch->child('config_b.json')->spew_raw(<<'EOF');
   'memoize': 1,
   'config': {
     'driver': 'Memory',
-    'global': 0,
-  },
+    'global': 0
+  }
 }]
 EOF
 
