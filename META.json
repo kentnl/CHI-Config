@@ -111,7 +111,6 @@
             "Test::More" : "1.001009"
          },
          "requires" : {
-            "CHI::Driver::Memory" : "0",
             "ExtUtils::MakeMaker" : "0",
             "File::Spec" : "0",
             "Path::Tiny" : "0",
@@ -152,7 +151,6 @@
    "x_BuiltWith" : {
       "modules" : {
          "CHI" : "0.58_00",
-         "CHI::Driver::Memory" : "0.58_00",
          "CPAN::Meta" : "2.142690",
          "Carp" : "1.34",
          "Config::Any" : "0.24",

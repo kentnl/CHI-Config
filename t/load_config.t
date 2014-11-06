@@ -39,18 +39,6 @@ $scratch->child('config_b.json')->spew_raw(<<'EOF');
 EOF
 
 use CHI::Config;
-use CHI::Driver::Memory;
-
-{
-  my $sub;
-  use Data::Dump qw(pp);
-  BEGIN { $sub = CHI::Driver::Memory->can('BUILD'); };
-  sub CHI::Driver::Memory::BUILD {
-    my ( $self, @args ) = @_;
-    pp( 'CHI::Driver::Memory::BUILD' => \@args );
-    return $sub->(@_);
-  }
-}
 
 my $cfg = CHI::Config->new(
   config_paths => [ $scratch->child('config_b'), $scratch->child('config') ],

@@ -27,8 +27,8 @@ sub get_cache {
   require CHI;
   require Storable;
 
-  my $instance = CHI->new(%{ $self->config });
-  
+  my $instance = CHI->new( %{ Storable::dclone( $self->config ) } );
+
   $self->{_cache} = $instance if $self->memoize;
 
   return $instance;
