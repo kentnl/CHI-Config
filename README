@@ -47,7 +47,7 @@ METHODS
 
       $cache-># things with CHI
 
-    *Optional*: An Arrayref of path prefixes to scan and load.
+    *Optional*: An ArrayRef of path prefixes to scan and load.
 
     For instance:
 
@@ -74,7 +74,7 @@ METHODS
         ~/.chi/config.*
         /etc/chi/config.*
 
-    *Optional*: An ArrayRef of files to scan and autoload.
+    *Optional*: An ArrayRef of files to scan and load.
 
     If specified, this list entirely overrules that provided by
     "config_paths"

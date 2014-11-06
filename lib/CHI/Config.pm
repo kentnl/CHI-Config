@@ -246,7 +246,7 @@ Retrieve an instance of a cache object for consumption.
 
 =carg C<config_paths>
 
-I<Optional>: An Arrayref of path prefixes to scan and load.
+I<Optional>: An ArrayRef of path prefixes to scan and load.
 
 For instance:
 
@@ -275,7 +275,7 @@ Default paths loaded are as follows:
 
 =carg C<config_files>
 
-I<Optional>: An ArrayRef of files to scan and autoload.
+I<Optional>: An ArrayRef of files to scan and load.
 
 If specified, this list entirely overrules that provided by
 L<< C<config_paths>|/config_paths >>
