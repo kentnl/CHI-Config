@@ -24,10 +24,10 @@ sub get_cache {
   require CHI;
   require Storable;
 
-  return CHI->new( %{ Storable::dclone( $self->config ) } ) unless $self->memoize;
+  return CHI->new( %{ $self->config } ) unless $self->memoize;
 
   return $self->{_cache} if exists $self->{_cache};
-  return ( $self->{_cache} = CHI->new( %{ Storable::dclone( $self->config ) } ) );
+  return ( $self->{_cache} = CHI->new( %{ $self->config } ) );
 }
 
 sub source {
