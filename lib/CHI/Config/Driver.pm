@@ -28,8 +28,6 @@ sub get_cache {
 
   my %args = %{ Storable::dclone( $self->config ) };
 
-  warn pp( { creating => \%args, name => $self->name, file => $self->file } );
-
   return CHI->new(%args) unless $self->memoize;
 
   return $self->{_cache} if exists $self->{_cache};

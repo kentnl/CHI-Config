@@ -34,6 +34,7 @@ my %WriteMakefileArgs = (
     "warnings" => 0
   },
   "TEST_REQUIRES" => {
+    "CHI::Driver::Memory" => 0,
     "ExtUtils::MakeMaker" => 0,
     "File::Spec" => 0,
     "Path::Tiny" => 0,
@@ -50,6 +51,7 @@ my %WriteMakefileArgs = (
 
 my %FallbackPrereqs = (
   "CHI" => 0,
+  "CHI::Driver::Memory" => 0,
   "Carp" => 0,
   "Config::Any" => 0,
   "Data::Dump" => 0,
