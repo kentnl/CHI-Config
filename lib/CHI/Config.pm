@@ -294,6 +294,8 @@ Retrieve an instance of a cache object for consumption.
 
   $cache-># things with CHI
 
+=for Pod::Coverage BUILD BUILDARGS
+
 =head1 ENTRIES
 
 Both the internal array based interface and the configuration file
