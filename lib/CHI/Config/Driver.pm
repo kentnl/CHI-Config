@@ -19,6 +19,7 @@ has 'config'   => ( is => 'ro', required => 1 );
 has 'memoize'  => ( is => 'ro', lazy     => 1, default => undef );
 
 use Data::Dump qw(pp);
+
 sub get_cache {
   my ($self) = @_;
 
@@ -27,12 +28,12 @@ sub get_cache {
 
   my %args = %{ Storable::dclone( $self->config ) };
 
-  warn pp({ creating => \%args });
+  warn pp( { creating => \%args, name => $self->name, file => $self->file } );
 
-  return CHI->new( %args ) unless $self->memoize;
+  return CHI->new(%args) unless $self->memoize;
 
   return $self->{_cache} if exists $self->{_cache};
-  return ( $self->{_cache} = CHI->new( %args ) );
+  return ( $self->{_cache} = CHI->new(%args) );
 }
 
 sub source {
