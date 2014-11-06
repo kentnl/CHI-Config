@@ -78,7 +78,6 @@ do { my $x = {
                                       'CHI' => '0',
                                       'Carp' => '0',
                                       'Config::Any' => '0',
-                                      'Data::Dump' => '0',
                                       'File::HomeDir' => '0',
                                       'Moo' => '0',
                                       'Storable' => '0',

@@ -18,8 +18,6 @@ has 'entry_no' => ( is => 'ro', required => 1 );
 has 'config'   => ( is => 'ro', required => 1 );
 has 'memoize'  => ( is => 'ro', lazy     => 1, default => undef );
 
-use Data::Dump qw(pp);
-
 sub get_cache {
   my ($self) = @_;
   return $self->{_cache} if exists $self->{_cache};
