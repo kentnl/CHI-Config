@@ -10,7 +10,7 @@ our $VERSION = '0.001000';
 
 our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 
-use Moo;
+use Moo qw( has );
 
 has 'name'     => ( is => 'ro', required => 1 );
 has 'file'     => ( is => 'ro', required => 1 );

@@ -12,6 +12,8 @@ our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 
 use Moo qw( has );
 use Carp qw( carp croak );
+
+## no critic (ValuesAndExpressions::ProhibitConstantPragma)
 use constant DEBUGGING => $ENV{CHI_CONFIG_DEBUG};
 
 has '_drivers' => ( is => ro =>, lazy => 1, default => sub { {} } );
