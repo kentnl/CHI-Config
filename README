@@ -1,0 +1,162 @@
+NAME
+    CHI::Config - Define CHI configuration outside your code
+
+VERSION
+    version 0.001000
+
+SYNOPSIS
+      use CHI::Config;
+
+      my $config = CHI::Config->new(
+        defaults => [
+          # Defaults indeed has to mimic the source file for future purposes
+          # ie: I plan to make some objects ( such as serializers )
+          # be configurable as well and they can't really be defined as-is in JSON
+          {
+              type => 'driver',
+              name => 'myproject.roflmayo',
+              config => {
+                  # Arguments to CHI->new()
+              },
+          },
+        ],
+      );
+
+      my $cache = $config->get_cache('myproject.roflmayo');
+
+      # Do stuff with $cache and get default behaviour
+
+      # User creates ~/.chi/config.json
+      [
+        {
+          'type' : 'driver',
+          'name' : 'myproject.roflmayo',
+          'config': {
+             # CHI CONFIG HERE
+          },
+        }
+      ]
+
+      my $cache = $config->get_cache('myproject.roflmayo');  # Now gets user defined copy
+
+CONSTRUCTOR ARGUMENTS
+  "config_paths"
+    *Optional*: An ArrayRef of path prefixes to scan and load.
+
+    For instance:
+
+      ( config_paths => ['./foo'] )
+
+    Would automatically attempt to load any files called
+
+      foo.yml
+      foo.json
+      foo.ini
+
+    And load them with the relevant helpers.
+
+    See "Config::Any" for details on this mechanism.
+
+    Paths will be interpreted in the order specified, with the first one
+    taking precedence over the latter ones for any given driver name, with
+    "defaults" being taken only if they're needed.
+
+    Default paths loaded are as follows:
+
+        $ENV{CHI_CONFIG_DIR}/config.*
+        ./chi_config.*
+        ~/.chi/config.*
+        /etc/chi/config.*
+
+  "config_files"
+    *Optional*: An ArrayRef of files to scan and load.
+
+    If specified, this list entirely overrules that provided by
+    "config_paths"
+
+  "defaults"
+    *Recommended*: An ArrayRef of defaults in the same notation as the
+    configuration spec.
+
+      defaults => [
+           $entry,
+           $entry,
+           $entry,
+      ],
+
+    See "ENTRIES"
+
+METHODS
+  "get_cache"
+    Retrieve an instance of a cache object for consumption.
+
+      my $cache = $config->get_cache('myproject.myname');
+
+      $cache-># things with CHI
+
+ENTRIES
+    Both the internal array based interface and the configuration file are a
+    list of "Entries". Design somewhat inspired by "Config::MVP"'s sequence
+    model, but much more lightweight.
+
+  "driver" entry
+    These make up the core of a configuration.
+
+      {
+        type => 'driver',
+
+        # The following are all passed through to
+        # CHI::Config::Driver
+
+        # STRONGLY recommended
+        name => 'mynamespace.mycachename',
+
+        # RAW CHI arguments
+        config => {
+          %CONFIG    #
+        },
+
+        # return singleton or new caches?
+        memoize => 0,
+      }
+
+    See "CHI::Config::Driver" for details.
+
+  "version" entry
+    This is a mostly unnecessary element simply designed to give some kind
+    of informal API in the event there are changes in how the configuration
+    is parsed.
+
+    Currently, Spec version is == 0.1.0
+
+      {
+        type => 'version',
+
+        # Declare a minimum version of CHI::Config
+        min => 0.001000,
+
+        # Declare a maximum version of CHI::Config
+        max => 1.000000,
+
+        # Require exactly specification 0.1.0
+        spec => '0.1.0',
+      }
+
+    "max" and "min" give range controls on the version of "CHI::Config"
+    itself.
+
+    "spec" gives an exact match on the *interface* provided by
+    "CHI::Config", and is processed as an exact string match.
+
+    Any of the criteria not being satisfied will result in a "croak"
+
+AUTHOR
+    Kent Fredric <kentnl@cpan.org>
+
+COPYRIGHT AND LICENSE
+    This software is copyright (c) 2014 by Kent Fredric
+    <kentfredric@gmail.com>.
+
+    This is free software; you can redistribute it and/or modify it under
+    the same terms as the Perl 5 programming language system itself.
+
