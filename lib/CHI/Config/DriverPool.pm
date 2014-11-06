@@ -71,12 +71,12 @@ version 0.001000
   my $dp = CHI::Config::DriverPool->new();
 
   $dp->add_driver(
-    name => ...   # See CHI::Config::Driver for arguments
-  )
+    name => ...    # See CHI::Config::Driver for arguments
+  );
 
-  $dp->get_driver( $name )  # Fetches a CHI::Config::Driver instance
+  $dp->get_driver($name);    # Fetches a CHI::Config::Driver instance
 
-  $dp->get_cache( $name )   # Shorthand for $dp->get_driver($name)->get_cache
+  $dp->get_cache($name);     # Shorthand for $dp->get_driver($name)->get_cache
 
 =head1 DESCRIPTION
 
