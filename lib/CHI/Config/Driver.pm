@@ -18,16 +18,21 @@ has 'entry_no' => ( is => 'ro', required => 1 );
 has 'config'   => ( is => 'ro', required => 1 );
 has 'memoize'  => ( is => 'ro', lazy     => 1, default => undef );
 
+use Data::Dump qw(pp);
 sub get_cache {
   my ($self) = @_;
 
   require CHI;
   require Storable;
 
-  return CHI->new( %{ $self->config } ) unless $self->memoize;
+  my %args = %{ Storable::dclone( $self->config ) };
+
+  warn pp({ creating => \%args });
+
+  return CHI->new( %args ) unless $self->memoize;
 
   return $self->{_cache} if exists $self->{_cache};
-  return ( $self->{_cache} = CHI->new( %{ $self->config } ) );
+  return ( $self->{_cache} = CHI->new( %args ) );
 }
 
 sub source {
