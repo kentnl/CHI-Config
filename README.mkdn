@@ -4,7 +4,7 @@ CHI::Config - Define CHI configuration outside your code
 
 # VERSION
 
-version 0.001000
+version 0.001001
 
 # SYNOPSIS
 
