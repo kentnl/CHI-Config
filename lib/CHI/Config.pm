@@ -135,7 +135,7 @@ sub _load_version {
 
 sub _load_entry {
   my ( $self, %entry ) = @_;
-  my $context = sprintf "%s ( entry #%s )", $entry{file}, $entry{entry_no};
+  my $context = sprintf q[%s ( entry #%s )], $entry{file}, $entry{entry_no};
   my $name = ( $entry{name} ? q[ named ] . $entry{name} : q[ ] );
   croak "No type specified for entry$name in $context" unless defined $entry{type};
   return $self->_load_version(%entry) if 'version' eq $entry{type};
@@ -155,8 +155,8 @@ sub _load_array {
     }
     $self->_load_entry(
       %{$entry},
-      file     => $file,       #
-      entry_no => $entry_no    #
+      file     => $file,        #
+      entry_no => $entry_no,    #
     );
     $entry_no++;
   }
