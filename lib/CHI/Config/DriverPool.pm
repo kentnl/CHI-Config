@@ -4,7 +4,7 @@ use warnings;
 
 package CHI::Config::DriverPool;
 
-our $VERSION = '0.001000';
+our $VERSION = '0.001001'; # TRIAL
 
 # ABSTRACT: A Collection of Driver definitions
 

@@ -4,7 +4,7 @@ use warnings;
 
 package CHI::Config;
 
-our $VERSION = '0.001000';
+our $VERSION = '0.001001'; # TRIAL
 
 # ABSTRACT: Define CHI configuration outside your code
 
