@@ -4,6 +4,8 @@ use warnings;
 
 package CHI::Config::Driver;
 
+our $VERSION = '0.001000';
+
 # ABSTRACT: Container for Driver configuration
 
 our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY

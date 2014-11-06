@@ -4,6 +4,8 @@ use warnings;
 
 package CHI::Config::DriverPool;
 
+our $VERSION = '0.001000';
+
 # ABSTRACT: A Collection of Driver definitions
 
 our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
