@@ -60,7 +60,7 @@ has '_drivers' => (
 
 sub BUILDARGS {
   my ( undef, @args ) = @_;
-  my (@caller) = caller(1);    # +1 for Moo
+  my (@caller) = caller 1;    # +1 for Moo
   if ( 1 == @args and ref $args[0] ) {
     $args[0]->{_constructor_caller} = $caller[1];
     return $args[0];
@@ -70,6 +70,7 @@ sub BUILDARGS {
 
 sub BUILD {
   my ($self) = @_;
+  ## no critic (Variables::ProhibitPackageVars)
   local $Carp::CarpLevel = $Carp::CarpLevel + 1;
   $self->_load_config;
   $self->_load_defaults;
