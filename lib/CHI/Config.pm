@@ -13,16 +13,6 @@ our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 use Carp qw( croak );
 use Moo qw( has around );
 
-sub BUILDARGS {
-  my ( $class, @args ) = @_;
-  my (@caller) = caller(1);    # +1 for Moo
-  if ( @args == 1 and ref $args[0] ) {
-    $args[0]->{_constructor_caller} = $caller[1];
-    return $args[0];
-  }
-  return { @args, _constructor_caller => $caller[1] };
-}
-
 has '_constructor_caller' => (
   is       => 'ro',
   required => 1,
@@ -32,43 +22,22 @@ has '_config_paths' => (
   init_arg => 'config_paths',
   is       => 'ro',
   lazy     => 1,
-  builder  => '_build_config_paths'
+  builder  => '_build_config_paths',
 );
-
-sub _build_config_paths {
-  require File::HomeDir;
-  my (@scan_paths) = (
-    ( exists $ENV{CHI_CONFIG_DIR} ? $ENV{CHI_CONFIG_DIR} . '/config' : () ),    # From ENV
-    './chi_config',                                                             # ./
-    File::HomeDir->my_home . '/.chi/config',                                    # ~/.chi/
-    '/etc/chi/config',                                                          # /etc/chi/
-  );
-  return \@scan_paths;
-}
 
 has '_config_files' => (
   init_arg => 'config_files',
   is       => 'ro',
   lazy     => 1,
-  builder  => '_build_config_files'
+  builder  => '_build_config_files',
 );
-
-sub _build_config_files { return [] }
 
 has '_config' => (
   init_arg => undef,
   is       => 'ro',
   lazy     => 1,
-  builder  => '_build_config'
+  builder  => '_build_config',
 );
-
-sub _build_config {
-  my ($self) = @_;
-  require Config::Any;
-  my %extras = ( use_ext => 1 );
-  return Config::Any->load_files( { files => $self->_config_files, %extras } ) if @{ $self->_config_files };
-  return Config::Any->load_stems( { stems => $self->_config_paths, %extras } );
-}
 
 has '_defaults' => (
   init_arg => 'defaults',
@@ -76,10 +45,6 @@ has '_defaults' => (
   lazy     => 1,
   builder  => '_build_defaults',
 );
-
-sub _build_defaults {
-  return [];
-}
 
 has '_drivers' => (
   is       => 'ro',
@@ -93,10 +58,14 @@ has '_drivers' => (
   },
 );
 
-sub _build_drivers {
-  my ($self) = @_;
-  require CHI::Config::DriverPool;
-  my $pool = CHI::Config::DriverPool->new();
+sub BUILDARGS {
+  my ( undef, @args ) = @_;
+  my (@caller) = caller(1);    # +1 for Moo
+  if ( 1 == @args and ref $args[0] ) {
+    $args[0]->{_constructor_caller} = $caller[1];
+    return $args[0];
+  }
+  return { @args, _constructor_caller => $caller[1] };
 }
 
 sub BUILD {
@@ -104,6 +73,38 @@ sub BUILD {
   local $Carp::CarpLevel = $Carp::CarpLevel + 1;
   $self->_load_config;
   $self->_load_defaults;
+  return;
+}
+
+sub _build_config_paths {
+  require File::HomeDir;
+  my (@scan_paths) = (
+    ( exists $ENV{CHI_CONFIG_DIR} ? $ENV{CHI_CONFIG_DIR} . '/config' : () ),    # From ENV
+    './chi_config',                                                             # ./
+    File::HomeDir->my_home . '/.chi/config',                                    # ~/.chi/
+    '/etc/chi/config',                                                          # /etc/chi/
+  );
+  return \@scan_paths;
+}
+
+sub _build_config_files { return [] }
+
+sub _build_config {
+  my ($self) = @_;
+  require Config::Any;
+  my %extras = ( use_ext => 1 );
+  return Config::Any->load_files( { files => $self->_config_files, %extras } ) if @{ $self->_config_files };
+  return Config::Any->load_stems( { stems => $self->_config_paths, %extras } );
+}
+
+sub _build_defaults {
+  return [];
+}
+
+sub _build_drivers {
+  my ($self) = @_;
+  require CHI::Config::DriverPool;
+  return CHI::Config::DriverPool->new();
 }
 
 sub _load_version {
@@ -135,7 +136,7 @@ sub _load_version {
 sub _load_entry {
   my ( $self, %entry ) = @_;
   my $context = sprintf "%s ( entry #%s )", $entry{file}, $entry{entry_no};
-  my $name = ( $entry{name} ? ' named ' . $entry{name} : ' ' );
+  my $name = ( $entry{name} ? q[ named ] . $entry{name} : q[ ] );
   croak "No type specified for entry$name in $context" unless defined $entry{type};
   return $self->_load_version(%entry) if 'version' eq $entry{type};
   return $self->_add_driver(%entry)   if 'driver' eq $entry{type};
