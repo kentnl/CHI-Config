@@ -276,7 +276,7 @@ L<< C<config_paths>|/config_paths >>
 
 I<Recommended>: An ArrayRef of defaults in the same notation as the configuration spec.
 
-  defaults => [ 
+  defaults => [
        $entry,
        $entry,
        $entry,

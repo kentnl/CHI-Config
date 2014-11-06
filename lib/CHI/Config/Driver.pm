@@ -81,7 +81,7 @@ Otherwise returns a new C<CHI> instance with every call.
 
 =head2 C<source>
 
-Returns a string 
+Returns a string
 
 =head1 ATTRIBUTES
 
