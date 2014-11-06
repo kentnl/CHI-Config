@@ -102,13 +102,12 @@ sub _build_defaults {
 }
 
 sub _build_drivers {
-  my ($self) = @_;
   require CHI::Config::DriverPool;
   return CHI::Config::DriverPool->new();
 }
 
 sub _load_version {
-  my ( $self, %entry ) = @_;
+  my ( undef, %entry ) = @_;
 
   my $spec      = '0.1.0';
   my $entry_msg = "$entry{file} ( entry #$entry{entry_no} )";
