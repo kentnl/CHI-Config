@@ -41,13 +41,13 @@ SYNOPSIS
 
 METHODS
   "get_cache"
-    Retreive an instance of a cache object for consumption.
+    Retrieve an instance of a cache object for consumption.
 
       my $cache = $config->get_cache('myproject.myname');
 
       $cache-># things with CHI
 
-    *Optional*: An arrayref of path prefixes to scan and autoload.
+    *Optional*: An Arrayref of path prefixes to scan and load.
 
     For instance:
 
@@ -79,7 +79,7 @@ METHODS
     If specified, this list entirely overrules that provided by
     "config_paths"
 
-    *Recommeneded*: An ArrayRef of defaults in the same notation as the
+    *Recommended*: An ArrayRef of defaults in the same notation as the
     configuration spec.
 
       defaults => [ 

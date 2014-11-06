@@ -238,7 +238,7 @@ version 0.001000
 
 =head2 C<get_cache>
 
-Retreive an instance of a cache object for consumption.
+Retrieve an instance of a cache object for consumption.
 
   my $cache = $config->get_cache('myproject.myname');
 
@@ -246,7 +246,7 @@ Retreive an instance of a cache object for consumption.
 
 =carg C<config_paths>
 
-I<Optional>: An arrayref of path prefixes to scan and autoload.
+I<Optional>: An Arrayref of path prefixes to scan and load.
 
 For instance:
 
@@ -282,7 +282,7 @@ L<< C<config_paths>|/config_paths >>
 
 =carg C<defaults>
 
-I<Recommeneded>: An ArrayRef of defaults in the same notation as the configuration spec.
+I<Recommended>: An ArrayRef of defaults in the same notation as the configuration spec.
 
   defaults => [ 
        $entry,
