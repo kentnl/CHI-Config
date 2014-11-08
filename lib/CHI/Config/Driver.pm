@@ -4,7 +4,7 @@ use warnings;
 
 package CHI::Config::Driver;
 
-our $VERSION = '0.001001'; # TRIAL
+our $VERSION = '0.001001';    # TRIAL
 
 # ABSTRACT: Container for Driver configuration
 
@@ -16,7 +16,7 @@ has 'name'     => ( is => 'ro', required => 1 );
 has 'file'     => ( is => 'ro', required => 1 );
 has 'entry_no' => ( is => 'ro', required => 1 );
 has 'config'   => ( is => 'ro', required => 1 );
-has 'memoize'  => ( is => 'ro', lazy     => 1, default => undef );
+has 'memoize'  => ( is => 'ro', lazy     => 1, default => sub { undef } );
 
 sub get_cache {
   my ($self) = @_;
