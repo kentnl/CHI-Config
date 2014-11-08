@@ -1,5 +1,9 @@
 Release history for CHI-Config
 
+0.001001 2014-11-08T02:38:47Z de26588
+ [Bugfix]
+ - Don't have a broken default on old Moo
+
 0.001000 2014-11-06T22:23:22Z a824103
  - First version.
 
